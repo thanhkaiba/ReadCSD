@@ -30,13 +30,19 @@ const res_folder = (() => {
 })();
 
 
-if (!is_dir(filePath)) {
-    readCsd(filePath);
-} else {
-    const filePaths = fs.readdirSync(filePath);
-    filePaths.forEach(file => {
-        readCsd(convertPath(path.join(filePath, file)));
-    });
+resolve(filePath);
+
+
+function resolve(filePathm) {
+    if (!is_dir(filePathm)) {
+        readCsd(filePathm);
+    } else {
+        const filePaths = fs.readdirSync(filePathm);
+        filePaths.forEach(file => {
+            resolve(convertPath(path.join(filePathm, file)));
+        });
+    }
+
 }
 
 
